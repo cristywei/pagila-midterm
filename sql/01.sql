@@ -10,3 +10,16 @@
  * NOTE:
  * Your results should not contain any duplicate titles.
  */
+SELECT title
+FROM film
+JOIN film_actor USING (film_id)
+JOIN actor USING (actor_id)
+JOIN inventory ON film.film_id = inventory.film_id
+JOIN rental USING (inventory_id)
+JOIN customer USING (customer_id)
+WHERE title NOT LIKE '%F%'
+    AND actor.first_name NOT LIKE '%F%'
+    AND actor.last_name NOT LIKE '%F%'
+    AND customer.first_name NOT LIKE '%F%'
+    AND customer.last_name NOT LIKE '%F%'
+GROUP BY title;
